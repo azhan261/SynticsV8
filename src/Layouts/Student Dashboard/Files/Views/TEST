@@ -1,0 +1,111 @@
+import React from 'react'
+import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
+import { Formik, FormikConsumer, useFormik } from 'formik'
+import { useHistory } from "react-router-dom";
+import {createPlacementTestQuestions} from '../Apis/apiForPlacementTestQuestions'
+function PlacementQuestionDetails() {
+        /*const { register, handleSubmit } = useForm({
+    defaultValues: { text: todo ? todo.text : "" },
+  });*/
+
+  /*const submitHandler = handleSubmit((data) => {
+    onSubmit(data)
+  });*/
+  const history = useHistory()
+  
+  const onSubmit = async (data) => {
+    console.log(data)
+    await createPlacementTestQuestions(data)
+    //redirecting 
+    //history.push("/")
+  };
+
+    //1 Start of by making initial values 
+    const formik = useFormik({
+        initialValues: {
+            question:'',
+            totalmarks: '',
+        },
+
+        //4 Make onSubmit propert to handle what happens to data on form submisison
+
+        onSubmit: values => {
+
+          
+          //createTodo(formik.values)
+          //redirecting 
+          //history.push("/")
+
+          onSubmit(formik.values)
+
+        },
+
+        //5 Make validation property
+
+        validate: values => {
+            
+            let errors = {}
+
+            const letters = /^[A-Za-z ]+$/;
+
+            const cnic = /^[0-9--]+$/;
+
+            const phone = /^[0-9]+$/;
+
+            const symbols = /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/;
+            
+            if(!values.totalmarks){
+                errors.totalmarks = "Please fill in Total Marks"
+            }else if (!phone.test(values.totalmarks)) {
+                errors.phone = "Please enter digits only"
+            }
+            if(values.totalmarks > 100){
+                errors.totalmarks = "Total marks can not exceed 100"
+            }
+            return errors
+
+
+        }
+        
+
+
+    })
+
+    console.log("Form errors", formik.errors)
+    return (
+        <>
+        <div className="container-fluid">
+        <Row>
+          <Col md="12">
+            <Card className="card-plain">
+              <CardHeader>
+                  Placement Question Details
+              </CardHeader>
+              <CardBody>
+              <div className="form-group">
+                        <label htmlFor>
+                           Question
+                        </label>
+                        {/*2 put onChange = {formkit.handleChange} value={formik.values.name} in all the form fields with their corroposind name  in values */}
+                        <input type="text" placeholder="Question" name="marks" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.question} className="form-control" required  />
+                        {formik.errors.question && formik.touched.question ? (<div className='error' style={{color:'red', fontWeight: 'bold'}}>{formik.errors.question}</div>) : null}
+              </div>
+              <div className="form-group">
+                        <label htmlFor>
+                            Total Marks for Question
+                        </label>
+                        {/*2 put onChange = {formkit.handleChange} value={formik.values.name} in all the form fields with their corroposind name  in values */}
+                        <input type="text" placeholder="Total Marks" name="marks" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.totalmarks} className="form-control" required  />
+                        {formik.errors.totalmarks && formik.touched.totalmarks ? (<div className='error' style={{color:'red', fontWeight: 'bold'}}>{formik.errors.totalmarks}</div>) : null}
+              </div>
+              </CardBody>
+              </Card>
+            </Col>
+        </Row>
+        </div>
+    </>
+    )
+}
+
+export default PlacementQuestionDetails
+*/

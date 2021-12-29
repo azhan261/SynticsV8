@@ -1,0 +1,30 @@
+.containerWhiteBoard {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #306EFF, #306EFF);
+}
+
+.color-picker-container {
+    text-align: center;
+    display: inline;
+    color: white;
+}
+
+.brushsize-container {
+    display: inline;
+    color: black;
+    margin-left: 12px;
+}
+
+.tools-section {
+    text-align: center;
+}
+
+.board-container {
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    margin-top: 1%;
+    background: white;
+}
